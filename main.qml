@@ -19,47 +19,44 @@ Window {
         font.pointSize: 15
     }
 
-    RowLayout {
-        anchors.left: parent.left; anchors.top: pageTitleId.bottom;
-        anchors.right: parent.right; anchors.bottom: parent.bottom
+    GridLayout {
+        anchors.left: parent.left; anchors.top: pageTitleId.bottom; anchors.right: parent.right;
         anchors.margins: 20
 
-        ColumnLayout {
+        columns: 2
+        columnSpacing: 20; rowSpacing: 20
+
+        // FIRST Control
+        Text {
+            id: switchTextId
             Layout.fillWidth: true
+            Layout.alignment: Qt.AlignLeft
 
-            Text {
-                id: switchTextId
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignLeft
-
-                text: "<b>Switch.qml</b><br>" + qsTr("Original switch. Enabled: ") + switchId.checked
-            }
-
-            Text {
-                id: longSwitchTextId
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignLeft
-
-                text: "<b>Switch.qml</b><br>" + qsTr("Customized switch. Enabled: ") + swipeSwitchId.checked
-            }
+            text: "<b>Switch.qml</b><br>" + qsTr("Original switch. Enabled: ") + switchId.checked
         }
 
-        ColumnLayout {
+        MyComp.Switch {
+            id: switchId
+            Layout.alignment: Qt.AlignHCenter
+        }
 
-            MyComp.Switch {
-                id: switchId
-                Layout.alignment: Qt.AlignHCenter
-            }
+        // SECOND Control
+        Text {
+            id: longSwitchTextId
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignLeft
 
-            MyComp.Switch {
-                id: swipeSwitchId
-                Layout.alignment: Qt.AlignHCenter
+            text: "<b>Switch.qml</b><br>" + qsTr("Customized switch. Enabled: ") + swipeSwitchId.checked
+        }
 
-                offColor: "#8e8e93"
-                onColor: "#147efb"
+        MyComp.Switch {
+            id: swipeSwitchId
+            Layout.alignment: Qt.AlignHCenter
 
-                width: 175;
-            }
+            offColor: "#8e8e93"
+            onColor: "#147efb"
+
+            width: 175;
         }
     }
 }
