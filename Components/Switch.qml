@@ -6,15 +6,14 @@ Item {
     property bool checked: false
     onCheckedChanged: pillId.x = root.checked ? (root.width - pillId.width) : 0
 
-    signal clicked(bool checked);
-    onClicked: root.checked = checked
+    function onClicked(checked) {
+        root.checked = checked
+    }
 
     property string offColor: "indianred"
     property string onColor: "seagreen"
 
-    property alias enableShadow: pillShadowId.enabled
-
-    width: 150; height: 80;
+    width: 60; height: 35;
 
     Rectangle {
         id: bgId
@@ -40,7 +39,7 @@ Item {
         Behavior on color { ColorAnimation { duration: 200 } }
     }
 
-    DropShadow {
+    DropShadow { // Shadow: remove this for better performance
         id: pillShadowId
         enabled: false
 
@@ -67,13 +66,13 @@ Item {
 
         onReleased: {
             if(!root.checked && pillId.x === 0)
-                root.clicked(!root.checked)
+                root.onClicked(!root.checked)
             else if(root.checked && pillId.x === root.width - pillId.width)
-                root.clicked(!root.checked)
+                root.onClicked(!root.checked)
             else if(!root.checked && (pillId.x + pillId.width*.5) > root.width*.5)
-                root.clicked(!root.checked)
+                root.onClicked(!root.checked)
             else if(root.checked && (pillId.x + pillId.width*.5) < root.width*.5)
-                root.clicked(!root.checked)
+                root.onClicked(!root.checked)
             else
                pillId.x = root.checked ? (root.width - pillId.width) : 0
         }
