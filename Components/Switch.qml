@@ -6,6 +6,8 @@ Item {
     property bool checked: false
     onCheckedChanged: pillId.x = root.checked ? (root.width - pillId.width) : 0
 
+    property bool clickTrigger: true
+
     function onClicked(checked) {
         root.checked = checked
     }
@@ -65,9 +67,9 @@ Item {
         }
 
         onReleased: {
-            if(!root.checked && pillId.x === 0)
+            if(root.clickTrigger && !root.checked && pillId.x === 0)
                 root.onClicked(!root.checked)
-            else if(root.checked && pillId.x === root.width - pillId.width)
+            else if(root.clickTrigger && root.checked && pillId.x === root.width - pillId.width)
                 root.onClicked(!root.checked)
             else if(!root.checked && (pillId.x + pillId.width*.5) > root.width*.5)
                 root.onClicked(!root.checked)

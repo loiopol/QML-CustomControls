@@ -55,6 +55,7 @@ Window {
 
             offColor: "#8e8e93"
             onColor: "#147efb"
+            clickTrigger: false
 
             width: 175;
         }
